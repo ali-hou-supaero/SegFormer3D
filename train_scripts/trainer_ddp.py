@@ -807,7 +807,7 @@ class AutoEncoder_Trainer:
         if self.ema_enabled and self.val_ema_model:
             checkpoint = {
                 "state_dict": self.val_ema_model.state_dict(),
-                "optimizer": self.optimizer.state_dict(),
+                "optimizer": self.optimizer.state_dict(),   
             }
             torch.save(checkpoint, f"{os.path.dirname(filename)}/ema_model_ckpt.pth")
             self.val_ema_model = (
@@ -816,6 +816,11 @@ class AutoEncoder_Trainer:
 
         # standard model checkpoint
         self.accelerator.save_state(filename, safe_serialization=False)
+
+        # --- minimal addition: save epoch separately ---
+        if self.current_epoch is not None:
+            torch.save({"epoch": self.current_epoch}, f"{os.path.dirname(filename)}/training_meta.pt")
+
 
     def _update_ema_bn(self, duplicate_model: bool = True):
         """
