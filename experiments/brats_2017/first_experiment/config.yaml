@@ -15,7 +15,8 @@ wandb_parameters:
   entity: alihoussenaly-isae-supaero   # W&B username
   group: brats2017    # optional grouping for runs
   name: segformer3d_adamw_batch2_diceloss
-  resume: False
+  resume: "must"   # automatically resume if run with same name exists
+  id: "vybwzlw7"  # unique id to identify the run
   tags: ["segformer3d", "brats2017", "adamw"]
 
 # model parameters
@@ -83,10 +84,10 @@ training_parameters:
   calculate_metrics: True
   grad_accumulate_steps: 1 # default: 1
   checkpoint_save_dir: "model_checkpoints/best_dice_checkpoint"
-  # load_checkpoint: # not implemented yet
-  #   load_full_checkpoint: False
-  #   load_model_only: False
-  #   load_checkpoint_path: None
+  load_checkpoint: # not implemented yet
+    load_full_checkpoint: True
+    load_model_only: False
+    load_checkpoint_path: "model_checkpoints/best_dice_checkpoint"
 
   load_checkpoint:
     load_full_checkpoint: True        # load model + optimizer + schedulers

@@ -123,6 +123,24 @@ def launch_experiment(config_path) -> Dict:
         "training_scheduler": training_scheduler,
     }
 
+    # -------------------------
+    # Minimal accelerate-based resume logic
+    # -------------------------
+    load_cfg = config["training_parameters"].get("load_checkpoint", {}) # get load config
+    if load_cfg.get("load_full_checkpoint", False): # if we are loading from checkpoint, False is default in case key is missing
+        ckpt_path = load_cfg.get("load_checkpoint_path", None)
+        if not ckpt_path:
+            accelerator.print("[error] load_full_checkpoint is True but no load_checkpoint_path provided in config.")
+            raise ValueError("Missing load_checkpoint_path in config.")
+        if not os.path.exists(ckpt_path):
+            accelerator.print(f"[error] checkpoint path does not exist: {ckpt_path}")
+            raise FileNotFoundError(ckpt_path)
+
+        accelerator.print(f"[info] Loading checkpoint via accelerate from: {ckpt_path}")
+        # This will restore model/optimizer/scheduler/scaler/etc. into the prepared (wrapped) objects.
+        accelerator.load_state(ckpt_path)
+        accelerator.print("[info] accelerate.load_state finished. Model and optimizer states restored.")
+
     # set up trainer
     trainer = Segmentation_Trainer(
         config=config,
