@@ -1,3 +1,23 @@
+# SegFormer3D — fork de travail
+
+Ce dépôt est un fork de [l'implémentation officielle d'OSUPCVLab](https://github.com/OSUPCVLab/SegFormer3D). L'architecture et les résultats scientifiques de référence appartiennent aux auteurs cités dans la documentation originale ci-dessous.
+
+## Projet collectif et contribution personnelle
+
+Le travail de groupe associé est disponible dans [jesptri/PFE-SegFormer3D](https://github.com/jesptri/PFE-SegFormer3D).
+
+Ma contribution à ce projet collectif porte sur la configuration des expériences BraTS, l'adaptation du lancement et de l'entraînement distribué, l'ajustement des dépendances et le diagnostic du pipeline. Les commits correspondants sont historiquement attribués à [Alistare22](https://github.com/Alistare22) :
+
+- [Configuration d'expériences et entraînement](https://github.com/jesptri/PFE-SegFormer3D/commit/b586f66c64450dd05b8b720aa3b9b97202ee238a)
+- [Ajustements du chargement, des dépendances et du lancement](https://github.com/jesptri/PFE-SegFormer3D/commit/b0d207630654977a7b170ee366fbe94f82f13041)
+- [Diagnostic et corrections du pipeline](https://github.com/jesptri/PFE-SegFormer3D/commit/c646ce42c81430bab2ea6434da0e80aa1fc7353f)
+
+Pour consulter les développements de l'équipe et leur mode d'exécution, utiliser le dépôt du PFE. Les résultats décrits plus bas sont ceux de la documentation originale, et ne constituent pas des performances personnelles revendiquées.
+
+La [licence GPL-3.0](LICENSE), les crédits et la documentation originale sont conservés.
+
+---
+
 # SegFormer3D
 ## An Efficient Transformer for 3D Medical Image Segmentation
 <p align="center">
